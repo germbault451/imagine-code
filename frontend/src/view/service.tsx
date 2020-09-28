@@ -5,7 +5,7 @@ export class Service extends React.Component<{}> {
         return (
             <section className='bloc-page'>
                 <div>
-                    <h2>Page Services</h2>
+                    <h2>Page Services (Les services) </h2>
                 </div>
             </section>
         );
