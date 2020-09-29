@@ -7,7 +7,7 @@ export class Service extends React.Component<{}> {
             <section className='bloc-page'>
                 <section>
                     <h2>Page Services (Les services) </h2>
-                </div>
+                </section>
                 <section>
                     <BookEditor />
                 </section>
