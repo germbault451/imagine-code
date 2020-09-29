@@ -1,7 +1,8 @@
 import bodyParser from 'body-parser';
 import errorHandler from 'errorhandler';
 import express from 'express';
-import { bookRouter } from './router/bookrouter';
+// import { bookRouter } from './router/bookrouter';
+import { messageRouter } from './router/messagerouter';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use((_req, res, next) => {
     next();
 });
 
-app.use('/book', bookRouter);
+// app.use('/book', bookRouter);
+app.use('/message', messageRouter);
 
 export { app };
