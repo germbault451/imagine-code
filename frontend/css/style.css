@@ -222,15 +222,17 @@ button {
 .contact-h2 p {
     color: #9aa2d3;
     font-style: normal;
-    float: right;
-    text-align: right;
+    margin-bottom: -605px;    text-align: right;
 }
 
 #contactform {
+    margin-top: 200px;
     margin-left: 0;
     width: 100%;
 }
 
 #googlemap {
     border: none;
+    width: 50%;
+    height: 365px;
 }
