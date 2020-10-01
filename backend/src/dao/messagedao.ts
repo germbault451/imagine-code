@@ -19,8 +19,8 @@ export class MessageDAO {
     }
 
     public async updateMessage(message: MessageModel) {
-        const { first_name, city, object, text } = message;
-        await this.knex('message').update({ first_name, city, object, text }).where({ message });
+        const { messageId, first_name, city, object, text } = message;
+        await this.knex('message').update({ first_name, city, object, text }).where({ messageId });
     }
 
     public async deleteMessage(messageId: number) {

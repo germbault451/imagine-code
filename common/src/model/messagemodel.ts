@@ -10,6 +10,7 @@ export class MessageModel {
     public static fromJSON(jsonMessageModel: MessageModel) {
         const messageModel = new MessageModel;
         Object.assign(messageModel, jsonMessageModel);
+        messageModel.created_at = new Date(messageModel.created_at);
         return messageModel;
     }
 }

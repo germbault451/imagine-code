@@ -20,6 +20,11 @@ app.use((_req, res, next) => {
 });
 
 // app.use('/book', bookRouter);
+
+app.get('/', (_req, res) => {
+    res.send('allo');
+});
+
 app.use('/message', messageRouter);
 
 export { app };

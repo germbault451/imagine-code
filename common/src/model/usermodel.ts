@@ -2,8 +2,10 @@ import { Role } from '../enum/role';
 
 export class UserModel {
     public userId: number;
-    public name: string;
-    public email: string;
+    public first_name: string;
+    // public email: string;
+    public created_at: Date;
+
     public roles: Role[];
 
     constructor() {

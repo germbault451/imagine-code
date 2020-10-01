@@ -2,6 +2,7 @@ import { MessageModel } from 'common';
 import { Router } from 'express';
 import { MessageDAO } from '../dao/messagedao';
 import { wrap } from '../util';
+import { userRouter } from './user.router';
 
 const messageRouter = Router();
 const messageDAO = new MessageDAO;
@@ -24,14 +25,14 @@ messageRouter.get('/:messageId', wrap(async (req, res) => {
 }));
 
 messageRouter.post('/', wrap(async (req, res) => {
-    const message: MessageModel = req.body;
+    const message = MessageModel.fromJSON(req.body);
     const messageId = await messageDAO.createMessage(message);
     message.created_at = new Date(message.created_at);
     return res.send(await messageDAO.getMessage(messageId));
 }));
 
 messageRouter.put('/:messageId', wrap(async (req, res) => {
-    const updated: MessageModel = req.body;
+    const updated = MessageModel.fromJSON(req.body);
     updated.messageId = req.message.messageId;
 
     await messageDAO.updateMessage(updated);
@@ -43,5 +44,7 @@ messageRouter.delete('/:messageId', wrap(async (req, res) => {
     await messageDAO.deleteMessage(req.message.messageId);
     return res.sendStatus(204);
 }));
+
+messageRouter.use('/:messageId/user', userRouter);
 
 export { messageRouter };
