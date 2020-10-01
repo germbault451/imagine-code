@@ -6,6 +6,7 @@ body {
     font-family: "Montserrat", sans-serif; /* Police de la maquette */
     margin: 0px;
     font-size: 18px;
+    color: #3b4757;
 }
 
 h1,
@@ -31,7 +32,7 @@ ul {
 }
 
 a {
-    color: black;
+    color: #3b4757;
     text-decoration: none;
 }
 
@@ -81,7 +82,7 @@ button {
 }
 
 .homeSection {
-    color: black;
+    color: #3b4757;
     text-align: justify;
     width: 45%;
     margin-top: 20%;
@@ -133,7 +134,7 @@ button {
     padding: 10px 30px 0px 30px;
     font-size: 20px;
     font-weight: bold;
-    color: #000;
+    color: #3b4757;
 }
 
 .space {
@@ -148,7 +149,7 @@ button {
     border: none;
     padding: 5px 50px;
     margin: 0px 0px 10px 215px;
-    box-shadow: 0px 0px 15px #dee2e6;
+    box-shadow: 0px 0px 15px hsla(232, 39%, 72%, 0.5);
 }
 
 .form {
@@ -173,7 +174,7 @@ button {
     width: 40%;
     border: none;
     border-radius: 10px;
-    box-shadow: 0px 0px 15px #dee2e6;
+    box-shadow: 0px 0px 15px hsla(232, 39%, 72%, 0.5);
 }
 
 .form input:nth-last-child(1) {
@@ -188,7 +189,7 @@ button {
     width: 40%;
     border: none;
     border-radius: 10px;
-    box-shadow: 0px 0px 15px #dee2e6;
+    box-shadow: 0px 0px 15px hsla(232, 39%, 72%, 0.5);
     align-self: flex-end;
 }
 
@@ -199,5 +200,37 @@ button {
     width: 100%;
     border: none;
     border-radius: 10px;
-    box-shadow: 0px 0px 15px #dee2e6;
+    box-shadow: 0px 0px 15px hsla(232, 39%, 72%, 0.5);
+}
+
+/* Contact page */
+.contact-h2 {
+    margin-top: 100px;
+}
+
+.contact-h2 h2 {
+    font-weight: bold;
+    font-size: 36px;
+    width: 40%;
+}
+
+.contact-h2 em {
+    color: #9aa2d3;
+    font-style: normal;
+}
+
+.contact-h2 p {
+    color: #9aa2d3;
+    font-style: normal;
+    float: right;
+    text-align: right;
+}
+
+#contactform {
+    margin-left: 0;
+    width: 100%;
+}
+
+#googlemap {
+    border: none;
 }
