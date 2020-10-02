@@ -92,7 +92,7 @@ button {
     width: 45%;
     margin-top: 20%;
     margin-left: 10%;
-    position: ;
+    /* position: ; */
 }
 
 .homeSection > h1 {
@@ -278,4 +278,14 @@ button {
     max-height: 80vh;
     min-height: 80vh;
     /* position: relative; */
+}
+
+/* Connexion page */
+
+#connexionForm > .form {
+    margin: auto;
+}
+
+#connexionForm > .form input:nth-last-child(1) {
+    margin-left: 0%;
 }

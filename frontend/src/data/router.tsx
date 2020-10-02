@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import { Connexion } from 'view/connexion';
 import { Contact } from 'view/contact';
 import { Home } from 'view/home';
 import { Service } from 'view/service';
@@ -16,6 +17,8 @@ export class Router extends React.Component<{}> {
                             <li><Link to='/equipe'>Équipe</Link></li>
                             <li><Link to='/services'>Services</Link></li>
                             <li><Link to='/contact'>Contact</Link></li>
+                            <li><Link to='/connexion'>Connexion</Link></li>
+
                         </ul>
                     </nav>
                 </section>
@@ -25,6 +28,7 @@ export class Router extends React.Component<{}> {
                 <Route path='/equipe'><Team /></Route>
                 <Route path='/services'><Service /></Route>
                 <Route path='/contact'><Contact /></Route>
+                <Route path='/connexion'><Connexion /></Route>
             </Switch>
         </BrowserRouter>;
     }

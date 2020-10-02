@@ -1,4 +1,4 @@
-// import { BookEditor } from 'component/bookeditor';
+//  import { BookEditor } from 'component/bookeditor';
 import { BookMessageEditor } from 'component/service/messageeditor';
 import React from 'react';
 
@@ -9,9 +9,11 @@ export class Service extends React.Component<{}> {
                 <section className='bloc-page'>
                     <section>
                         <br />
+                        {/* <BookEditor /> */}
                         <BookMessageEditor />
                     </section>
-                </section></>
+                </section>
+            </>
         );
     }
 }
