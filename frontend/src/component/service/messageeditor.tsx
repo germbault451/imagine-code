@@ -60,21 +60,17 @@ interface State {
     text?: string;
     disabled?: boolean;
 }
-
 export class BookMessageEditor extends React.Component<Props, State> {
     private api = new Api;
 
     constructor(props: Props) {
         super(props);
-
         this.state = {};
     }
-
     public async componentDidMount() {
         const messages = (await this.api.getJson('/message') as any[]).map(MessageModel.fromJSON);
         this.setState({ messages });
     }
-
     public render() {
         const { messages } = this.state;
         if (!messages) { return 'Chargement...'; }
@@ -118,7 +114,6 @@ export class BookMessageEditor extends React.Component<Props, State> {
             </section>
         </>;
     }
-
     private getMessageCount = (message: MessageModel) => {
         if (message.text === null) {
             return 'message non trouvé';
