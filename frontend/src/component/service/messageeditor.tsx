@@ -1,58 +1,126 @@
+import { Api } from 'api';
+// import { MessageModel } from 'common';
+// import React from 'react';
+// import { BookCreationMessageForm } from './messagecreationform';
+// interface Props { }
+// interface State {
+// messages?: MessageModel[];
+// }
+// export class BookMessageEditor extends React.Component<Props, State> {
+// constructor(props: Props) {
+// super(props);
+// this.state = {};
+// }
+// public async componentDidMount() {
+// const messages = (await (await fetch('/api/message')).json() as any[]).map(MessageModel.fromJSON);
+// this.setState({ messages });
+// }
+// public render() {
+// const { messages } = this.state;
+// if (!messages) { return 'Chargement...'; }
+// return <>
+// <section className='background__message'>
+// <h2>Ce que les gens en pensent</h2>
+// {messages.map(message =>
+// <section key={message.messageId} className='ajust'>
+// <p className='color-01 strong'>{message.first_name}, de: {message.city}<span>x</span></p>
+// <p className='color-01'>Object: {message.object}</p>
+// <p className='color-01'>{this.getMessageCount(message)}</p>
+// <section className='space'>
+// <p className='color-01'>Publié le: {message.created_at.toString()}</p>
+// <input className='bottom' type='submit' value='Lire plus' />
+// </section>
+// </section>)}
+// </section>
+// <section>
+// <BookCreationMessageForm addMessage={message => {
+// messages.push(message);
+// this.setState({ messages });
+// }} />
+// </section>
+// </>;
+// }
+// private getMessageCount = (message: MessageModel) => {
+// if (message.text === null) {
+// return 'message non trouvé';
+// } else {
+// return `${message.text}`;
+// }
+// };
+// }
 import { MessageModel } from 'common';
 import React from 'react';
-import { BookCreationMessageForm } from './messagecreationform';
-
 interface Props { }
 interface State {
     messages?: MessageModel[];
+    first_name?: string;
+    city?: string;
+    object?: string;
+    text?: string;
+    disabled?: boolean;
 }
-
 export class BookMessageEditor extends React.Component<Props, State> {
-
+    private api = new Api;
     constructor(props: Props) {
         super(props);
-
         this.state = {};
     }
-
     public async componentDidMount() {
-        const messages = (await (await fetch('/api/message')).json() as any[]).map(MessageModel.fromJSON);
+        const messages = (await this.api.getJson('/message') as any[]).map(MessageModel.fromJSON);
         this.setState({ messages });
     }
-
     public render() {
         const { messages } = this.state;
         if (!messages) { return 'Chargement...'; }
-
+        const dateFormat = { year: 'numeric', month: 'long', day: 'numeric' };
         return <>
             <section className='background__message'>
                 <h2>Ce que les gens en pensent</h2>
                 {messages.map(message =>
                     <section key={message.messageId} className='ajust'>
-                        <p className='color-01 strong'>{message.first_name}, de: {message.city}<span>x</span></p>
+                        <p className='color-01 strong'>{message.first_name}, de: {message.city}
+                            <span onClick={() => this.deleteMessage(message)}>x</span></p>
                         <p className='color-01'>Object: {message.object}</p>
                         <p className='color-01'>{this.getMessageCount(message)}</p>
                         <section className='space'>
-                            <p className='color-01'>Publié le: {message.created_at.toString()}</p>
+                            <p className='color-01'>Publié le: {message.created_at.toLocaleDateString('fr-CA', dateFormat)}</p>
                             <input className='bottom' type='submit' value='Lire plus' />
                         </section>
                     </section>)}
             </section>
-
-            <section>
-                <BookCreationMessageForm addMessage={message => {
-                    messages.push(message);
-                    this.setState({ messages });
-                }} />
+            <section className='form'>
+                <h2>Laissez-nous un commentaire</h2>
+                <form onSubmit={this.createMessage}>
+                    <input type='text' placeholder='Prénom' required={true} value={this.state.first_name ?? ''} onChange={e => { this.setState({ first_name: e.target.value }); }} />
+                    <input type='text' placeholder='Ville' required={true} value={this.state.city ?? ''} onChange={e => { this.setState({ city: e.target.value }); }} />
+                    <select value={this.state.object ?? ''} onChange={e => { this.setState({ object: e.target.value }); }} >
+                        <option value='' disabled={true}>Selectionnez l'object du message</option>
+                        <option value='service'>service</option>
+                        <option value='entreprise'>entreprise</option>
+                        <option value='commentaire'>commentaire</option>
+                    </select>
+                    <textarea placeholder='Inscrire votre commentaire ici' required={true} value={this.state.text ?? ''} onChange={e => { this.setState({ text: e.target.value }); }} />
+                    <input type='submit' value='Envoyé' />
+                </form>
             </section>
         </>;
     }
-
     private getMessageCount = (message: MessageModel) => {
         if (message.text === null) {
             return 'message non trouvé';
         } else {
             return `${message.text}`;
         }
+    };
+    private createMessage = async (event: React.FormEvent) => {
+        event.preventDefault();
+        const body = { first_name: this.state.first_name, city: this.state.city, object: this.state.object, text: this.state.text };
+        const createdMessage = MessageModel.fromJSON(await this.api.postGetJson('/message', body));
+        this.state.messages!.push(createdMessage);
+        this.setState({ messages: this.state.messages, first_name: '', city: '', text: '' });
+    };
+    private deleteMessage = async (messageToDelete: MessageModel) => {
+        await this.api.delete('/message', messageToDelete.messageId);
+        this.setState({ messages: this.state.messages!.filter(message => message === messageToDelete) });
     };
 }
