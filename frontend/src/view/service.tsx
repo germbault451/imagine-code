@@ -1,5 +1,5 @@
 //  import { BookEditor } from 'component/bookeditor';
-import { BookMessageEditor } from 'component/service/messageeditor';
+import { MessageEditor } from 'component/service/messageeditor';
 import React from 'react';
 
 export class Service extends React.Component<{}> {
@@ -10,7 +10,7 @@ export class Service extends React.Component<{}> {
                     <section>
                         <br />
                         {/* <BookEditor /> */}
-                        <BookMessageEditor />
+                        <MessageEditor />
                     </section>
                 </section>
             </>

@@ -1,55 +1,8 @@
 import { Api } from 'api';
-// import { MessageModel } from 'common';
-// import React from 'react';
-// import { BookCreationMessageForm } from './messagecreationform';
-// interface Props { }
-// interface State {
-//     messages?: MessageModel[];
-// }
-// export class BookMessageEditor extends React.Component<Props, State> {
-//     constructor(props: Props) {
-//         super(props);
-//         this.state = {};
-//     }
-//     public async componentDidMount() {
-//         const messages = (await (await fetch('/api/message')).json() as any[]).map(MessageModel.fromJSON);
-//         this.setState({ messages });
-//     }
-//     public render() {
-//         const { messages } = this.state;
-//         if (!messages) { return 'Chargement...'; }
-//         return <>
-//             <section className='background__message'>
-//                 <h2>Ce que les gens en pensent</h2>
-//                 {messages.map(message =>
-//                     <section key={message.messageId} className='ajust'>
-//                         <p className='color-01 strong'>{message.first_name}, de: {message.city}<span>x</span></p>
-//                         <p className='color-01'>Object: {message.object}</p>
-//                         <p className='color-01'>{this.getMessageCount(message)}</p>
-//                         <section className='space'>
-//                             <p className='color-01'>Publié le: {message.created_at.toString()}</p>
-//                             <input className='bottom' type='submit' value='Lire plus' />
-//                         </section>
-//                     </section>)}
-//             </section>
-//             <section>
-//                 <BookCreationMessageForm addMessage={message => {
-//                     messages.push(message);
-//                     this.setState({ messages });
-//                 }} />
-//             </section>
-//         </>;
-//     }
-//     private getMessageCount = (message: MessageModel) => {
-//         if (message.text === null) {
-//             return 'message non trouvé';
-//         } else {
-//             return `${message.text}`;
-//         }
-//     };
-// }
 import { MessageModel } from 'common';
 import React from 'react';
+import Modal from 'react-modal';
+import { UpdatedMessageEditor } from './updatedmessage';
 
 interface Props { }
 interface State {
@@ -59,8 +12,9 @@ interface State {
     object?: string;
     text?: string;
     disabled?: boolean;
+    messageBeingUpdated?: MessageModel;
 }
-export class BookMessageEditor extends React.Component<Props, State> {
+export class MessageEditor extends React.Component<Props, State> {
     private api = new Api;
 
     constructor(props: Props) {
@@ -76,18 +30,32 @@ export class BookMessageEditor extends React.Component<Props, State> {
         if (!messages) { return 'Chargement...'; }
 
         const dateFormat = { year: 'numeric', month: 'long', day: 'numeric' };
+        const closeConfirm = () => this.setState({ messageBeingUpdated: undefined });
+
         return <>
+            <Modal
+                isOpen={this.state.messageBeingUpdated !== undefined}
+                onRequestClose={closeConfirm}
+                className='Modal'
+                contentLabel='Example Modal'
+            >
+                {this.state.messageBeingUpdated && <UpdatedMessageEditor onRequestClose={closeConfirm}
+                    message={this.state.messageBeingUpdated} />}
+            </Modal>
             <section className='background__message'>
                 <h2>Ce que les gens en pensent</h2>
                 {messages.map(message =>
                     <section key={message.messageId} className='ajust'>
                         <p className='color-01 strong'>{message.first_name}, de: {message.city}
-                            <span onClick={() => this.deleteMessage(message)}>x</span></p>
+                            <span className='closemodal' onClick={() => this.deleteMessage(message)}>x</span></p>
                         <p className='color-01'>Object: {message.object}</p>
                         <p className='color-01'>{this.getMessageCount(message)}</p>
                         <section className='space'>
                             <p className='color-01'>Publié le: {message.created_at.toLocaleDateString('fr-CA', dateFormat)}</p>
-                            <input className='bottom' type='submit' value='Lire plus' />
+                            <div>
+                                <button type='button' onClick={() => this.setState({ messageBeingUpdated: message })}>Modifier votre message</button>
+                                <button type='button'>Lires plus</button>
+                            </div>
                         </section>
                     </section>)}
             </section>
@@ -132,6 +100,6 @@ export class BookMessageEditor extends React.Component<Props, State> {
 
     private deleteMessage = async (messageToDelete: MessageModel) => {
         await this.api.delete('/message', messageToDelete.messageId);
-        this.setState({ messages: this.state.messages!.filter(message => message === messageToDelete) });
+        this.setState({ messages: this.state.messages!.filter(message => message !== messageToDelete) });
     };
 }

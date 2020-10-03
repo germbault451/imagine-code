@@ -49,5 +49,5 @@ export class ContactForm extends React.Component<Props, State> {
         const createdSendingForm = ContactModel.fromJSON(await this.api.postGetJson('/contact', sendingForm));
         this.state.contact!.push(createdSendingForm);
         this.setState({ contact: this.state.contact, last_name: '', first_name: '', phone: '', email: '', comments: '' });
-    }
+    };
 }
