@@ -1,6 +1,5 @@
 html {
     height: 100%;
-    
 }
 
 body {
@@ -16,10 +15,10 @@ h2 {
 }
 
 header {
-    position: absolute;
     font-family: "Montserrat", sans-serif;
-    background: none;
     font-weight: bold;
+    width: 100%;
+    position: absolute;
 }
 
 li {
@@ -35,13 +34,31 @@ ul {
 }
 
 a {
+    float: right;
     color: #ffffff;
+    float: left;
+    text-align: center;
+    padding: 12px;
     text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
 }
 
 a:hover {
     text-decoration: none;
     color: #fdc54b;
+}
+
+.button {
+    background-color: white;
+    margin-left: 0;
+    height: 45px;
+    color: #9aa2d3;
+    width: 365px;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 0px 0px 15px hsla(0, 0%, 100%, 0.5);
 }
 
 button {
@@ -55,9 +72,15 @@ button {
 }
 
 .nav {
-    position: relative;
     font-size: 18px;
-    margin-right: 0px;
+}
+
+ul > img {
+    overflow: hidden;
+    width: 178px;
+    height: 52px;
+    align-self: center;
+    margin-right: auto;
 }
 
 .bloc-page {
@@ -93,16 +116,16 @@ button {
 .homeSection {
     color: #3b4757;
     text-align: justify;
-    width: 45%;
-    margin-top: 20%;
-    margin-left: 10%;
-    /* position: ; */
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 50%;
+    color: white;
 }
 
 .homeSection > h1 {
-    color: #fdc54b;
     text-align: left;
-    margin-right: -10rem;
+    color: #fdc54b;
 }
 
 /* section service */
@@ -258,39 +281,50 @@ input:focus {
 }
 
 .header-contact {
-    width: 100%;
-    height: 200px;
-    background-image: url("https://images.unsplash.com/photo-1531746790731-6c087fecd65a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1990&q=80"); /* IMAGE D'EXEMPLE */
-    max-height: 400px;
-    min-height: 400px;
-    /* position: relative; */
+    background-image: url("../img/header_contact.png");
+    max-height: 50vh;
+    min-height: 50vh;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .header-service {
-    width: 100%;
-    height: 200px;
-    background-image: url("https://images.unsplash.com/photo-1535378620166-273708d44e4c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1132&q=80"); /* IMAGE D'EXEMPLE */
-    max-height: 400px;
-    min-height: 400px;
-    /* position: relative; */
+    background-image: url("../img/header_service.png");
+    max-height: 50vh;
+    min-height: 50vh;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .header-team {
-    width: 100%;
-    height: 200px;
-    background-image: url("https://images.unsplash.com/photo-1553103291-346188e304d2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80"); /* IMAGE D'EXEMPLE */
-    max-height: 400px;
-    min-height: 400px;
-    /* position: relative; */
+    background-image: url("../img/header_equipe.png");
+    max-height: 50vh;
+    min-height: 50vh;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .header-home {
-    width: 100%;
-    height: 200px;
-    background-image: url("https://images.unsplash.com/photo-1565538420870-da08ff96a207?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"); /* IMAGE D'EXEMPLE */
-    max-height: 80vh;
-    min-height: 80vh;
-    /* position: relative; */
+    background-image: url("../img/header_home.png");
+    max-height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 /* Connexion page */
