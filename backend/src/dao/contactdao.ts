@@ -18,14 +18,14 @@ export class ContactDAO {
         return ContactModel.fromJSON(contact);
     }
 
-    // public async getContacts() {
-    //     const contacts = await this.knex('contact').select('*');
+    public async getContacts() {
+        const contacts = await this.knex('contact').select('*');
 
-    //     return contacts.map(ContactModel.fromJSON);
-    // }
-    // public async updateContact(contact: ContactModel) {
-    //     const { contactId, first_name, last_name, phone, email, comments } = contact;
-    //     await this.knex('contact').update({ first_name, last_name, phone, email, comments }).where({ contactId }); // Ne pas oublié de ne pas mettre le ID
-    // }
+        return contacts.map(ContactModel.fromJSON);
+    }
+    public async updateContact(contact: ContactModel) {
+        const { contactId, first_name, last_name, phone, email, comments } = contact;
+        await this.knex('contact').update({ first_name, last_name, phone, email, comments }).where({ contactId }); // Ne pas oublié de ne pas mettre le ID
+    }
 }
 

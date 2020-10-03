@@ -14,14 +14,14 @@ contactRouter.use('/:contactId', wrap(async (req, res, next) => {
     return next();
 }));
 
-// contactRouter.get('/', wrap(async (_req, res) => { // Permet d'aller chercher pour afficher les éléments
-//     const contacts = await contactDAO.getContacts();
-//     return res.send(contacts);
-// }));
+contactRouter.get('/', wrap(async (_req, res) => { // Permet d'aller chercher pour afficher les éléments
+    const contacts = await contactDAO.getContacts();
+    return res.send(contacts);
+}));
 
-// contactRouter.get('/:contactId', wrap(async (req, res) => {
-//     return res.send(req.contact);
-// }));
+contactRouter.get('/:contactId', wrap(async (req, res) => {
+    return res.send(req.contact);
+}));
 
 contactRouter.post('/', wrap(async (req, res) => {
     const contact = ContactModel.fromJSON(req.body);
@@ -29,16 +29,16 @@ contactRouter.post('/', wrap(async (req, res) => {
     return res.send(await contactDAO.getContact(contactId));
 }));
 
-// contactRouter.put('/:contactId', wrap(async (req, res) => { // Permet de mettre à jour un élément lié à l'identifiant
-//     const updated = ContactModel.fromJSON(req.body);
-//     updated.contactId = req.contact.contactId;
+contactRouter.put('/:contactId', wrap(async (req, res) => { // Permet de mettre à jour un élément lié à l'identifiant
+    const updated = ContactModel.fromJSON(req.body);
+    updated.contactId = req.contact.contactId;
 
-//     await contactDAO.updateContact(updated);
+    await contactDAO.updateContact(updated);
 
-//     return res.send(await contactDAO.getContact(req.contact.contactId));
-// }));
+    return res.send(await contactDAO.getContact(req.contact.contactId));
+}));
 
-// messageRouter.delete('/:messageId', wrap(async (req, res) => {
+// contacteRouter.delete('/:messageId', wrap(async (req, res) => {
 //     await messageDAO.deleteMessage(req.message.messageId);
 //     return res.sendStatus(204);
 // }));

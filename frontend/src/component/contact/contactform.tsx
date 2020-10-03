@@ -4,13 +4,12 @@ import React from 'react';
 
 interface Props { }
 interface State {
-    messages?: ContactModel[];
+    contact?: ContactModel[];
     first_name?: string;
     last_name?: string;
     phone?: string;
     email?: string;
     comments?: string;
-    disabled?: boolean;
 }
 
 export class ContactForm extends React.Component<Props, State> {
@@ -23,13 +22,13 @@ export class ContactForm extends React.Component<Props, State> {
     }
 
     public async componentDidMount() {
-        const messages = (await this.api.getJson('/contact') as any[]).map(ContactModel.fromJSON);
-        this.setState({ messages });
+        const contact = (await this.api.getJson('/contact') as any[]).map(ContactModel.fromJSON);
+        this.setState({ contact });
     }
 
     public render() {
-        // const { messages } = this.state;
-        // if (!messages) { return 'Chargement...'; }
+        // const { contacts } = this.state;
+        // if (!contacts) { return 'Chargement...'; }
 
         return <>
             <section className='form' id='contactform'>
@@ -48,9 +47,7 @@ export class ContactForm extends React.Component<Props, State> {
         event.preventDefault();
         const sendingForm = { last_name: this.state.last_name, first_name: this.state.first_name, phone: this.state.phone, email: this.state.email, comments: this.state.comments };
         const createdSendingForm = ContactModel.fromJSON(await this.api.postGetJson('/contact', sendingForm));
-        this.state.messages!.push(createdSendingForm);
-        this.setState({ messages: this.state.messages, last_name: '', first_name: '', phone: '', email: '', comments: '' });
+        this.state.contact!.push(createdSendingForm);
+        this.setState({ contact: this.state.contact, last_name: '', first_name: '', phone: '', email: '', comments: '' });
     }
 }
-
-
