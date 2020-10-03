@@ -1,5 +1,6 @@
 html {
     height: 100%;
+    
 }
 
 body {
@@ -81,6 +82,9 @@ button {
 }
 
 /* Home page */
+/* Home page */
+/* Home page */
+/* Home page */
 
 #home {
     background-color: #fdc54b;
@@ -128,6 +132,7 @@ button {
     padding: 0px 30px;
     color: rgb(161, 161, 161);
 }
+
 .color-01:nth-last-child(1) {
     padding-bottom: 10px;
 }
@@ -209,7 +214,15 @@ button {
     box-shadow: 0px 0px 15px hsla(232, 39%, 72%, 0.5);
 }
 
+input:focus {
+    background-color: #9aa2d3;
+}
+
 /* Contact page */
+/* Contact page */
+/* Contact page */
+/* Contact page */
+
 .contact-h2 {
     margin-top: 100px;
 }
@@ -280,6 +293,9 @@ button {
     /* position: relative; */
 }
 
+/* Connexion page */
+/* Connexion page */
+/* Connexion page */
 /* Connexion page */
 
 #connexionForm > .form {
