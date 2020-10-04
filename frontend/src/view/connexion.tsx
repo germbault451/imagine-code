@@ -1,5 +1,3 @@
-// import { api } from 'api';
-// import { IserModel } from 'common';
 import { ConnexionForm } from 'component/connexion/connexionform';
 import React from 'react';
 

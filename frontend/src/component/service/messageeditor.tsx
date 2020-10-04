@@ -58,7 +58,7 @@ export class MessageEditor extends React.Component<Props, State> {
                                     <p className='color-01'>Publié le: {message.created_at.toLocaleDateString('fr-CA', dateFormat)}</p>
                                     <div>
                                         <button type='button' onClick={() => this.setState({ messageBeingUpdated: message })}>Modifier votre message</button>
-                                        <Link to={`/${message.messageId}`}><button type='button'>Lires plus</button></Link>
+                                        <Link to={`/${message.messageId}`}><button type='button'>Lire plus</button></Link>
                                     </div>
                                 </section>
                             </section>)}

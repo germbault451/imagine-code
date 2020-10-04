@@ -34,11 +34,8 @@ ul {
 }
 
 a {
-    /* float: right; */
     color: #ffffff;
-    /* float: left; */
     text-align: center;
-    /* padding: 12px; */
     text-decoration: none;
     font-size: 18px;
     line-height: 25px;
@@ -84,7 +81,7 @@ button:hover {
     font-size: 18px;
 }
 
-ul > img {
+ul > .logo {
     overflow: hidden;
     width: 178px;
     height: 52px;
