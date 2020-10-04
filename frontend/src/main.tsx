@@ -8,6 +8,5 @@ Modal.setAppElement('#coreContainer');
 
 ReactDOM.render(
     < Router />,
-    // <BookEditor />,
     document.getElementById('coreContainer')
 );
