@@ -6,7 +6,6 @@ export class Contact extends React.Component<{}> {
     public render() {
         return (
             <>
-                <section className='header' />
                 <section className='header-contact' />
                 <section className='bloc-page'>
                     <section className='contact-h2'>

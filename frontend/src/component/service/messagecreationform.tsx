@@ -25,7 +25,6 @@ export class BookCreationMessageForm extends React.Component<Props, State> {
             <section className='form'>
                 <h2>Laissez-nous un commentaire</h2>
                 <form onSubmit={this.createBookMessage}>
-
                     <input type='text' placeholder='Prénom' required={true} value={first_name ?? ''} onChange={e => { this.setState({ first_name: e.target.value }); }} />
                     <input type='text' placeholder='Ville' required={true} value={city ?? ''} onChange={e => { this.setState({ city: e.target.value }); }} />
 
@@ -36,10 +35,11 @@ export class BookCreationMessageForm extends React.Component<Props, State> {
                         <option value='commentaire'>commentaire</option>
                     </select>
 
+
+
                     <textarea placeholder='Inscrire votre commentaire ici' required={true} value={text ?? ''} onChange={e => { this.setState({ text: e.target.value }); }} />
 
-                    <input type='submit' value='Envoyé' />
-
+                    <input className='button' type='submit' value='Envoyé' />
                 </form>
             </section>
         </>;

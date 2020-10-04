@@ -38,16 +38,19 @@ export class ContactForm extends React.Component<Props, State> {
                     <input type='text' placeholder='Numéro de téléphone' required={true} value={this.state.phone ?? ''} onChange={e => { this.setState({ phone: e.target.value }); }} />
                     <input type='email' placeholder='Courriel' required={true} value={this.state.email ?? ''} onChange={e => { this.setState({ email: e.target.value }); }} />
                     <textarea placeholder='Inscrire votre commentaire ici' required={true} value={this.state.comments ?? ''} onChange={e => { this.setState({ comments: e.target.value }); }} />
-                    <input type='submit' value='Envoyé' />
+                    <input className='button' type='submit' value='Envoyé' />
                 </form>
             </section>
         </>;
+
     }
+
     private createdMessageContact = async (event: React.FormEvent) => {
         event.preventDefault();
         const sendingForm = { last_name: this.state.last_name, first_name: this.state.first_name, phone: this.state.phone, email: this.state.email, comments: this.state.comments };
         const createdSendingForm = ContactModel.fromJSON(await this.api.postGetJson('/contact', sendingForm));
         this.state.contact!.push(createdSendingForm);
         this.setState({ contact: this.state.contact, last_name: '', first_name: '', phone: '', email: '', comments: '' });
+        return alert(' Houra! Nous avons bien reçu ton message. :)');
     };
-}
+};

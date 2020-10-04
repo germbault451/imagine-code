@@ -63,7 +63,7 @@ a:hover {
 
 button {
     margin: 20px 30px 20px 0px;
-    color: #000;
+    color: #3b4757;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -77,7 +77,7 @@ button {
 
 button:hover {
     color: #fff;
-    background-color: #000;
+    background-color: #fdc54b;
 }
 
 .nav {
@@ -137,7 +137,10 @@ ul > img {
     color: #fdc54b;
 }
 
-/* section service */
+/* Service page */
+/* Service page */
+/* Service page */
+/* Service page */
 
 .Modal {
     position: absolute;
@@ -217,6 +220,11 @@ ul > img {
     justify-content: space-between;
 }
 
+/* FORM */
+/* FORM */
+/* FORM */
+/* FORM */
+
 /* .bottom {
     background-color: #fff;
     border-radius: 8px;
@@ -232,6 +240,11 @@ ul > img {
     margin: 100px;
 }
 
+form {
+    font-family: "Montserrat", sans-serif; /* Police de la maquette */
+    font-size: 18px;
+}
+
 .form h2 {
     width: 32%;
     font-weight: 800;
@@ -245,7 +258,8 @@ ul > img {
 }
 
 .form input {
-    margin: 30px 0px;
+    font-family: "Montserrat", sans-serif; /* Police de la maquette */
+    margin: 20px 0px;
     padding: 10px;
     width: 40%;
     border: none;
@@ -254,29 +268,39 @@ ul > img {
 }
 
 .form input:nth-last-child(1) {
+    font-family: "Montserrat", sans-serif; /* Police de la maquette */
     background-color: rgb(146, 136, 218);
     color: #fff;
     align-self: flex-end;
 }
 
 .form input:nth-last-child(1):hover {
+    font-family: "Montserrat", sans-serif; /* Police de la maquette */
+
     background-color: rgb(122, 115, 180);
 }
 
 .form select {
+    font-family: "Montserrat", sans-serif; /* Police de la maquette */
+
     margin: 30px 0px;
     padding: 10px;
     width: 40%;
     border: none;
     border-radius: 10px;
+    color: #3b4757;
     box-shadow: 0px 0px 15px hsla(232, 39%, 72%, 0.5);
     align-self: flex-end;
+    margin-top: -55px;
 }
 
 .form textarea {
+    font-family: "Montserrat", sans-serif; /* Police de la maquette */
+    font-size: 18px;
     margin: 30px 0px;
     height: 300px;
     padding: 10px 0px 0px 10px;
+    color: #3b4757;
     /* width: 100%; */
     border: none;
     border-radius: 10px;
@@ -299,7 +323,7 @@ input:focus {
 .contact-h2 h2 {
     font-weight: bold;
     font-size: 36px;
-    width: 40%;
+    width: 50%;
 }
 
 .contact-h2 em {
@@ -310,7 +334,7 @@ input:focus {
 .contact-h2 p {
     color: #9aa2d3;
     font-style: normal;
-    margin-bottom: -605px;
+    margin-bottom: -500px;
     text-align: right;
 }
 
@@ -323,8 +347,13 @@ input:focus {
 #googlemap {
     border: none;
     width: 50%;
-    height: 365px;
+    height: 340px;
 }
+
+/* Header image */
+/* Header image */
+/* Header image */
+/* Header image */
 
 .header-contact {
     background-image: url("../img/header_contact.png");

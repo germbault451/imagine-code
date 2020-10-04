@@ -5,11 +5,11 @@ export class Team extends React.Component<{}> {
         return (
             <><section className='header-team' />
                 <section className='bloc-page'>
-                    <div>
-                        <br />
-                        <h2>Page Équipe</h2>
-                    </div>
-                </section></>
+                    <section className='contact-h2'>
+                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dictum <em> consectetur ipsum  </em> amet risus, ut tempus sit. Ut id vestibulum faucibus tincidunt lectus. Morbi congue libero aenean sed pretium.</h2>
+                    </section>
+                </section>
+            </>
         );
     }
 }
