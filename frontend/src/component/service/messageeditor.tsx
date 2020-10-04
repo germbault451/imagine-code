@@ -2,6 +2,7 @@ import { Api } from 'api';
 import { MessageModel } from 'common';
 import React from 'react';
 import Modal from 'react-modal';
+import { Link } from 'react-router-dom';
 import { UpdatedMessageEditor } from './updatedmessage';
 
 interface Props { }
@@ -32,53 +33,58 @@ export class MessageEditor extends React.Component<Props, State> {
         const dateFormat = { year: 'numeric', month: 'long', day: 'numeric' };
         const closeConfirm = () => this.setState({ messageBeingUpdated: undefined });
 
-        return <>
-            <Modal
-                isOpen={this.state.messageBeingUpdated !== undefined}
-                onRequestClose={closeConfirm}
-                className='Modal'
-                contentLabel='Example Modal'
-            >
-                {this.state.messageBeingUpdated && <UpdatedMessageEditor onRequestClose={closeConfirm}
-                    message={this.state.messageBeingUpdated} />}
-            </Modal>
-            <section className='background__message'>
-                <h2>Ce que les gens en pensent</h2>
-                {messages.map(message =>
-                    <section key={message.messageId} className='ajust'>
-                        <p className='color-01 strong'>{message.first_name}, de: {message.city}
-                            <span className='closemodal' onClick={() => this.deleteMessage(message)}>x</span></p>
-                        <p className='color-01'>Object: {message.object}</p>
-                        <p className='color-01'>{this.getMessageCount(message)}</p>
-                        <section className='space'>
-                            <p className='color-01'>Publié le: {message.created_at.toLocaleDateString('fr-CA', dateFormat)}</p>
-                            <div>
-                                <button type='button' onClick={() => this.setState({ messageBeingUpdated: message })}>Modifier votre message</button>
-                                <button type='button'>Lires plus</button>
-                            </div>
-                        </section>
-                    </section>)}
-            </section>
+        return <><section className='header-service' />
+            <section className='bloc-page'>
+                <section>
+                    <br />
+                    <Modal
+                        isOpen={this.state.messageBeingUpdated !== undefined}
+                        onRequestClose={closeConfirm}
+                        className='Modal'
+                        contentLabel='Example Modal'
+                    >
+                        {this.state.messageBeingUpdated && <UpdatedMessageEditor onRequestClose={closeConfirm}
+                            message={this.state.messageBeingUpdated} />}
+                    </Modal>
+                    <section className='background__message'>
+                        <h2>Ce que les gens en pensent</h2>
+                        {messages.map(message =>
+                            <section key={message.messageId} className='ajust'>
+                                <p className='color-01 strong'>{message.first_name}, de: {message.city}
+                                    <span className='closemodal' onClick={() => this.deleteMessage(message)}>x</span></p>
+                                <p className='color-01'>Object: {message.object}</p>
+                                <p className='color-01'>{this.getMessageCount(message)}</p>
+                                <section className='space'>
+                                    <p className='color-01'>Publié le: {message.created_at.toLocaleDateString('fr-CA', dateFormat)}</p>
+                                    <div>
+                                        <button type='button' onClick={() => this.setState({ messageBeingUpdated: message })}>Modifier votre message</button>
+                                        <Link to={`/${message.messageId}`}><button type='button'>Lires plus</button></Link>
+                                    </div>
+                                </section>
+                            </section>)}
+                    </section>
 
-            <section className='form'>
-                <h2>Laissez-nous un commentaire</h2>
-                <form onSubmit={this.createMessage}>
+                    <section className='form'>
+                        <h2>Laissez-nous un commentaire</h2>
+                        <form onSubmit={this.createMessage}>
 
-                    <input type='text' placeholder='Prénom' required={true} value={this.state.first_name ?? ''} onChange={e => { this.setState({ first_name: e.target.value }); }} />
-                    <input type='text' placeholder='Ville' required={true} value={this.state.city ?? ''} onChange={e => { this.setState({ city: e.target.value }); }} />
+                            <input type='text' placeholder='Prénom' required={true} value={this.state.first_name ?? ''} onChange={e => { this.setState({ first_name: e.target.value }); }} />
+                            <input type='text' placeholder='Ville' required={true} value={this.state.city ?? ''} onChange={e => { this.setState({ city: e.target.value }); }} />
 
-                    <select value={this.state.object ?? ''} onChange={e => { this.setState({ object: e.target.value }); }} >
-                        <option value='' disabled={true}>Selectionnez l'object du message</option>
-                        <option value='service'>service</option>
-                        <option value='entreprise'>entreprise</option>
-                        <option value='commentaire'>commentaire</option>
-                    </select>
+                            <select value={this.state.object ?? ''} onChange={e => { this.setState({ object: e.target.value }); }} >
+                                <option value='' disabled={true}>Selectionnez l'object du message</option>
+                                <option value='service'>service</option>
+                                <option value='entreprise'>entreprise</option>
+                                <option value='commentaire'>commentaire</option>
+                            </select>
 
-                    <textarea placeholder='Inscrire votre commentaire ici' required={true} value={this.state.text ?? ''} onChange={e => { this.setState({ text: e.target.value }); }} />
+                            <textarea placeholder='Inscrire votre commentaire ici' required={true} value={this.state.text ?? ''} onChange={e => { this.setState({ text: e.target.value }); }} />
 
-                    <input type='submit' value='Envoyé' />
+                            <input type='submit' value='Envoyé' />
 
-                </form>
+                        </form>
+                    </section>
+                </section>
             </section>
         </>;
     }
