@@ -24,7 +24,7 @@ export class Router extends React.Component<Props, State> {
                 <section className='bloc-page'>
                     <nav className='nav'>
                         <ul className='flex-grid'>
-                            <Link className='logo' to={`/home`}><img src='../../img/logo.png' alt='logo' /></Link>
+                            <Link className='logo' to={`/`}><img src='../../img/logo.png' alt='logo' /></Link>
                             <li><Link to='/'>Accueil</Link></li>
                             <li><Link to='/equipe'>Équipe</Link></li>
                             <li><Link to='/services'>Services</Link></li>
