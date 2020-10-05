@@ -25,7 +25,11 @@ export class Router extends React.Component<Props, State> {
                     <nav className='nav'>
                         <ul className='flex-grid'>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                             <Link className='logo' to={`/`}><img src='../../img/logo.png' alt='logo' /></Link>
+=======
+                            <Link className='logo' to={'/'}><img src='../../img/logo.png' alt='logo' /></Link>
+>>>>>>> Stashed changes
 =======
                             <Link className='logo' to={'/'}><img src='../../img/logo.png' alt='logo' /></Link>
 >>>>>>> Stashed changes
