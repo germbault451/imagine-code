@@ -1,26 +1,34 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface Props { }
 interface State { username?: string; password?: string; }
 
-export class ConnexionForm extends React.Component<Props, State> {
+export class LoginForm extends React.Component<Props, State> {
 
-    //     constructor(Props: Props) {
-    // super(Props);
+    constructor(props: Props) {
+        super(props);
 
-    // this.state = {};
-    //     }
+        this.state = {};
+    }
 
     public render() {
-        return <>
-            <form className='form'>
+        return <><section className='header-team' />
+            <section className='bloc-page'>
                 <section id='connexionForm'>
-                    <input type='text' placeholder='Identifiant' /> <br />
-                    <input type='password' placeholder='Mots de passe' />
-                    <br />
-                    <input type='button' value='submit' />
+                    <form className='form'>
+                        <h2 className='title-registerstyle' >Se connecter</h2>
+                        <section id='connexionForm'>
+                            <input type='text' placeholder='Identifiant' /> <br />
+                            <input type='password' placeholder='Mots de passe' />
+                            <br />
+                            <input type='button' value='submit' />
+                        </section>
+                    </form>
+                    <Link to={`/user`}><button type='button'>Vous n'avez pas de compte! Créer vous en un.</button></Link>
                 </section>
-            </form>
+            </section>
+
 
 
             {/* <input type='text' value={this.state.username ?? ''} onChange={e => {
@@ -32,7 +40,7 @@ export class ConnexionForm extends React.Component<Props, State> {
                  <input type='button' value='submit'/>
              </form>
              </section> */}
-        </>
+        </>;
     }
 }
 //     private login = async (e: React.FormEvent) => {

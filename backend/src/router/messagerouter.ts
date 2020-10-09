@@ -2,7 +2,6 @@ import { MessageModel } from 'common';
 import { Router } from 'express';
 import { MessageDAO } from '../dao/messagedao';
 import { wrap } from '../util';
-import { userRouter } from './user.router';
 
 const messageRouter = Router();
 const messageDAO = new MessageDAO;
@@ -44,7 +43,5 @@ messageRouter.delete('/:messageId', wrap(async (req, res) => {
     await messageDAO.deleteMessage(req.message.messageId);
     return res.sendStatus(204);
 }));
-
-messageRouter.use('/:messageId/user', userRouter);
 
 export { messageRouter };

@@ -1,10 +1,11 @@
+import { LoginForm } from 'component/connexion/loginuser';
+import { RegisterForm } from 'component/connexion/registeruser';
 import { MessageEditor } from 'component/service/messageeditor';
 import { ViewMessage } from 'component/service/viewmessage';
 import { BASE_HREF } from 'config.json';
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import { BrowserRouter, Link } from 'react-router-dom';
-import { Connexion } from 'view/connexion';
 import { Contact } from 'view/contact';
 import { Home } from 'view/home';
 import { Team } from 'view/team';
@@ -38,7 +39,8 @@ export class Router extends React.Component<Props, State> {
                 <Route path='/equipe' component={Team} />
                 <Route path='/services' component={MessageEditor} />
                 <Route path='/contact' component={Contact} />
-                <Route path='/connexion' component={Connexion} />
+                <Route path='/user' component={RegisterForm} />
+                <Route path='/connexion' component={LoginForm} />
                 <Route path='/:messageId' component={ViewMessage} />
                 <Route path='/' component={Home} />
             </Switch>

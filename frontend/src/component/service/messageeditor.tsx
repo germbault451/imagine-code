@@ -68,8 +68,8 @@ export class MessageEditor extends React.Component<Props, State> {
                         <h2>Laissez-nous un commentaire</h2>
                         <form onSubmit={this.createMessage}>
 
-                            <input type='text' placeholder='Prénom' required={true} value={this.state.first_name ?? ''} onChange={e => { this.setState({ first_name: e.target.value }); }} />
-                            <input type='text' placeholder='Ville' required={true} value={this.state.city ?? ''} onChange={e => { this.setState({ city: e.target.value }); }} />
+                            <input type='text' placeholder='Prénom' value={this.state.first_name ?? ''} onChange={e => { this.setState({ first_name: e.target.value }); }} />
+                            <input type='text' placeholder='Ville' value={this.state.city ?? ''} onChange={e => { this.setState({ city: e.target.value }); }} />
 
                             <select value={this.state.object ?? ''} onChange={e => { this.setState({ object: e.target.value }); }} >
                                 <option value='' disabled={true}>Selectionnez l'object du message</option>
@@ -78,10 +78,9 @@ export class MessageEditor extends React.Component<Props, State> {
                                 <option value='commentaire'>commentaire</option>
                             </select>
 
-                            <textarea placeholder='Inscrire votre commentaire ici' required={true} value={this.state.text ?? ''} onChange={e => { this.setState({ text: e.target.value }); }} />
+                            <textarea placeholder='Inscrire votre commentaire ici' value={this.state.text ?? ''} onChange={e => { this.setState({ text: e.target.value }); }} />
 
                             <input type='submit' value='Envoyé' />
-
                         </form>
                     </section>
                 </section>

@@ -2,8 +2,8 @@ import bodyParser from 'body-parser';
 import errorHandler from 'errorhandler';
 import express from 'express';
 import { contactRouter } from './router/contactrouter';
-// import { bookRouter } from './router/bookrouter';
 import { messageRouter } from './router/messagerouter';
+import { userRouter } from './router/userrouter';
 
 const app = express();
 
@@ -20,13 +20,8 @@ app.use((_req, res, next) => {
     next();
 });
 
-// app.use('/book', bookRouter);
-
-app.get('/', (_req, res) => {
-    res.send('allo');
-});
-
 app.use('/message', messageRouter);
+app.use('/user', userRouter);
 app.use('/contact', contactRouter);
 
 export { app };

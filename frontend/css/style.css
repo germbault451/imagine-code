@@ -415,3 +415,17 @@ input:focus {
 #connexionForm > .form input:nth-last-child(1) {
     margin-left: 0%;
 }
+
+#connexionForm button {
+    margin-bottom: 120px;
+}
+
+.registerStyle input:nth-last-child(1) {
+    align-self: flex-start;
+    margin-bottom: 120px;
+    width: 20%;
+}
+
+.form .title-registerstyle {
+    margin: 100px 0px 50px 0px;
+}
