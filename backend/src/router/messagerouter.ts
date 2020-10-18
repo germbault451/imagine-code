@@ -1,5 +1,5 @@
-import { MessageModel } from 'common';
-import { Router } from 'express';
+import { MessageModel, Permission } from 'common';
+import { NextFunction, Request, Response, Router } from 'express';
 import { MessageDAO } from '../dao/messagedao';
 import { wrap } from '../util';
 
@@ -23,7 +23,7 @@ messageRouter.get('/:messageId', wrap(async (req, res) => {
     return res.send(req.message);
 }));
 
-messageRouter.post('/', wrap(async (req, res) => {
+messageRouter.post('/', hasPermission(Permission.createMessage), wrap(async (req, res) => {
     const message = MessageModel.fromJSON(req.body);
     const messageId = await messageDAO.createMessage(message);
     message.created_at = new Date(message.created_at);
@@ -39,9 +39,17 @@ messageRouter.put('/:messageId', wrap(async (req, res) => {
     return res.send(await messageDAO.getMessage(req.message.messageId));
 }));
 
-messageRouter.delete('/:messageId', wrap(async (req, res) => {
+messageRouter.delete('/:messageId', hasPermission(Permission.deleteMessage), wrap(async (req, res) => {
     await messageDAO.deleteMessage(req.message.messageId);
     return res.sendStatus(204);
 }));
 
 export { messageRouter };
+function hasPermission(permission: Permission) {
+    return (req: Request, res: Response, next: NextFunction) => {
+        if (!req.user?.hasPermission(permission)) {
+            return res.sendStatus(403);
+        }
+        return next();
+    };
+}

@@ -47,6 +47,11 @@ CREATE TABLE `user`(
     `created_at` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
     )ENGINE=INNODB;
 
+CREATE TABLE `role`(
+    `userId` INT UNSIGNED NOT NULL PRIMARY KEY,
+    `role` VARCHAR (255) NOT NULL,
+    )ENGINE=INNODB;
+
 CREATE TABLE `contact`(
     `contactId` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	`first_name` VARCHAR (255) NOT NULL,

@@ -55,7 +55,7 @@ passport.serializeUser((user: UserModel, done) => {
 passport.deserializeUser(async (userId: number, done) => {
     const user = await authDAO.getUserById(userId);
     delete user!.password;
-    done(null, user);
+    done(null, user ? UserModel.fromJSON(user) : undefined);
 });
 
 passport.use(new Strategy(loginHangler));

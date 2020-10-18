@@ -7,5 +7,6 @@ declare global {
             registeruser: UserModel;
             contact: ContactModel;
         }
+        interface User extends UserModel { }
     }
 }
