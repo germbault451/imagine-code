@@ -2,10 +2,11 @@
 
 export class UserModel {
     public userId: number;
+    public username: string;
     public first_name: string;
     public last_name: string;
     public email: string;
-    public password: string;
+    public password?: string;
     public created_at: Date;
 
     // public roles: Role[];

@@ -9,7 +9,7 @@ const userDAO = new UserDAO;
 userRouter.use('/:userId', wrap(async (req, res, next) => {
     const user = await userDAO.getUser(parseInt(req.params.userId));
     if (user === null) { return res.sendStatus(404); }
-    req.user = user;
+    req.registeruser = user;
 
     return next();
 }));
@@ -20,7 +20,7 @@ userRouter.get('/', wrap(async (_req, res) => {
 }));
 
 userRouter.get('/:userId', wrap(async (req, res) => {
-    return res.send(req.user);
+    return res.send(req.registeruser);
 }));
 
 userRouter.post('/', wrap(async (req, res) => {
@@ -32,11 +32,11 @@ userRouter.post('/', wrap(async (req, res) => {
 
 userRouter.put('/:userId', wrap(async (req, res) => {
     const updated = UserModel.fromJSON(req.body);
-    updated.userId = req.user.userId;
+    updated.userId = req.registeruser.userId;
 
     await userDAO.updateUser(updated);
 
-    return res.send(await userDAO.getUser(req.user.userId));
+    return res.send(await userDAO.getUser(req.registeruser.userId));
 }));
 
 // userRouter.delete('/:userId', wrap(async (req, res) => {

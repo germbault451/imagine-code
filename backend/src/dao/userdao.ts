@@ -1,3 +1,4 @@
+// import bcrypt from 'bcrypt';
 import { UserModel } from 'common';
 import { DBProvider } from '../dbprovider';
 
@@ -5,9 +6,11 @@ export class UserDAO {
     private knex = DBProvider.getKnexConnection();
 
     public async createUser(user: UserModel) {
-        const { first_name, last_name, email, password } = user;
+        // const saltRounds = 12;
+        const { username, first_name, last_name, email, password } = user;
+        // const hash = await bcrypt.hash(password, saltRounds);
         const [userId] = await this.knex('user').insert({
-            first_name, last_name, email, password
+            username, first_name, last_name, email, password
         });
         return userId;
     }
@@ -25,8 +28,8 @@ export class UserDAO {
     }
 
     public async updateUser(user: UserModel) {
-        const { userId, first_name, last_name, email, password } = user;
-        await this.knex('user').update({ first_name, last_name, email, password }).where({ userId });
+        const { userId, username, first_name, last_name, email, password } = user;
+        await this.knex('user').update({ username, first_name, last_name, email, password }).where({ userId });
     }
 
     // public async deleteUser(userId: number) {

@@ -5,6 +5,7 @@ import React from 'react';
 interface Props { }
 interface State {
     user?: UserModel[];
+    username?: string;
     first_name?: string;
     last_name?: string;
     email?: string;
@@ -36,6 +37,7 @@ export class RegisterForm extends React.Component<Props, State> {
                         <h2 className='title-registerstyle' >Créer votre compte</h2>
                         <form className='registerStyle' onSubmit={this.createUser}>
 
+                            <input type='text' placeholder='Username' value={this.state.username ?? ''} onChange={e => { this.setState({ username: e.target.value }); }} />
                             <input type='text' placeholder='Prénom' value={this.state.first_name ?? ''} onChange={e => { this.setState({ first_name: e.target.value }); }} />
                             <input type='text' placeholder='Nom' value={this.state.last_name ?? ''} onChange={e => { this.setState({ last_name: e.target.value }); }} />
                             <input type='email' placeholder='Courriel' value={this.state.email ?? ''} onChange={e => { this.setState({ email: e.target.value }); }} />
@@ -51,9 +53,9 @@ export class RegisterForm extends React.Component<Props, State> {
 
     private createUser = async (event: React.FormEvent) => {
         event.preventDefault();
-        const body = { first_name: this.state.first_name, last_name: this.state.last_name, email: this.state.email, password: this.state.password };
+        const body = { username: this.state.username, first_name: this.state.first_name, last_name: this.state.last_name, email: this.state.email, password: this.state.password };
         const createdMessage = UserModel.fromJSON(await this.api.postGetJson('/user', body));
         this.state.user!.push(createdMessage);
-        this.setState({ user: this.state.user, first_name: '', last_name: '', email: '', password: '' });
+        this.setState({ user: this.state.user, username: '', first_name: '', last_name: '', email: '', password: '' });
     };
 }

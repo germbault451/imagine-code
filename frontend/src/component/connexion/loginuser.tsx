@@ -25,7 +25,7 @@ export class LoginForm extends React.Component<Props, State> {
                             <input type='button' value='submit' />
                         </section>
                     </form>
-                    <Link to={`/user`}><button type='button'>Vous n'avez pas de compte! Créer vous en un.</button></Link>
+                    <Link to={`/registeruser`}><button type='button'>Vous n'avez pas de compte! Créer vous en un.</button></Link>
                 </section>
             </section>
 

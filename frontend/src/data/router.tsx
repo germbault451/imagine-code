@@ -39,7 +39,7 @@ export class Router extends React.Component<Props, State> {
                 <Route path='/equipe' component={Team} />
                 <Route path='/services' component={MessageEditor} />
                 <Route path='/contact' component={Contact} />
-                <Route path='/user' component={RegisterForm} />
+                <Route path='/registeruser' component={RegisterForm} />
                 <Route path='/connexion' component={LoginForm} />
                 <Route path='/:messageId' component={ViewMessage} />
                 <Route path='/' component={Home} />

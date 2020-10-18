@@ -4,7 +4,7 @@ declare global {
     module Express {
         interface Request {
             message: MessageModel;
-            user: UserModel;
+            registeruser: UserModel;
             contact: ContactModel;
         }
     }
