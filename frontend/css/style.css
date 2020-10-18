@@ -77,6 +77,20 @@ button:hover {
     background-color: #fdc54b;
 }
 
+.logout-button {
+    margin: 24px 30px 24px 0px;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 6px 25px;
+    box-shadow: none;
+}
+
 .nav {
     font-size: 18px;
 }

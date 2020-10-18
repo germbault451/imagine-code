@@ -9,7 +9,7 @@ import { wrap } from '../util';
 const authRouter = Router();
 const authDao = new AuthDAO;
 
-authRouter.get('/login', passport.authenticate('local', {
+authRouter.post('/login', passport.authenticate('local', {
     session: true
 }), (req, res) => {
     if (req.user) {
@@ -19,7 +19,7 @@ authRouter.get('/login', passport.authenticate('local', {
     }
 });
 
-authRouter.get('/logout', wrap(async (req, res) => {
+authRouter.post('/logout', wrap(async (req, res) => {
     if (!req.session) { return res.send(); }
     req.session.destroy(err => {
         if (err !== undefined) {

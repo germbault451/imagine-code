@@ -1,5 +1,6 @@
 import { Api } from 'api';
-import { MessageModel } from 'common';
+import { MessageModel, Permission } from 'common';
+import { UserContext } from 'context/usercontext';
 import React from 'react';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
@@ -16,6 +17,8 @@ interface State {
     messageBeingUpdated?: MessageModel;
 }
 export class MessageEditor extends React.Component<Props, State> {
+    public static contextType = UserContext;
+    public context: UserContext;
     private api = new Api;
 
     constructor(props: Props) {
@@ -28,7 +31,8 @@ export class MessageEditor extends React.Component<Props, State> {
     }
     public render() {
         const { messages } = this.state;
-        if (!messages) { return 'Chargement...'; }
+        const { user } = this.context;
+        if (!messages || user === undefined) { return 'Chargement...'; }
 
         const dateFormat = { year: 'numeric', month: 'long', day: 'numeric' };
         const closeConfirm = () => this.setState({ messageBeingUpdated: undefined });
@@ -51,13 +55,16 @@ export class MessageEditor extends React.Component<Props, State> {
                         {messages.map(message =>
                             <section key={message.messageId} className='ajust'>
                                 <p className='color-01 strong'>{message.first_name}, de: {message.city}
-                                    <span className='closemodal' onClick={() => this.deleteMessage(message)}>x</span></p>
+                                    {user?.hasPermission(Permission.deleteMessage) ?
+                                        <span className='closemodal' onClick={() => this.deleteMessage(message)}>x</span> : null}
+                                </p>
                                 <p className='color-01'>Object: {message.object}</p>
                                 <p className='color-01'>{this.getMessageCount(message)}</p>
                                 <section className='space'>
                                     <p className='color-01'>Publié le: {message.created_at.toLocaleDateString('fr-CA', dateFormat)}</p>
                                     <div>
-                                        <button type='button' onClick={() => this.setState({ messageBeingUpdated: message })}>Modifier votre message</button>
+                                        {user?.hasPermission(Permission.updateMessage) ?
+                                            <button type='button' onClick={() => this.setState({ messageBeingUpdated: message })}>Modifier votre message</button> : null}
                                         <Link to={`/${message.messageId}`}><button type='button'>Lire plus</button></Link>
                                     </div>
                                 </section>
