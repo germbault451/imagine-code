@@ -30,7 +30,7 @@ messageRouter.post('/', hasPermission(Permission.createMessage), wrap(async (req
     return res.send(await messageDAO.getMessage(messageId));
 }));
 
-messageRouter.put('/:messageId', wrap(async (req, res) => {
+messageRouter.put('/:messageId', hasPermission(Permission.updateMessage), wrap(async (req, res) => {
     const updated = MessageModel.fromJSON(req.body);
     updated.messageId = req.message.messageId;
 

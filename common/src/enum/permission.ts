@@ -2,16 +2,19 @@ import { Role } from './role';
 
 export enum Permission {
     createMessage = 'createMessage',
-    deleteMessage = 'deleteMessage'
+    deleteMessage = 'deleteMessage',
+    updateMessage = 'updateMessage'
 }
 
 export const rolePermission = {
     [Role.admin]: [
         Permission.createMessage,
-        Permission.deleteMessage
+        Permission.deleteMessage,
+        Permission.updateMessage
     ],
 
     [Role.user]: [
-        Permission.createMessage
+        Permission.createMessage,
+        Permission.updateMessage
     ]
 };
