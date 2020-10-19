@@ -29,6 +29,17 @@ authRouter.post('/logout', wrap(async (req, res) => {
     return res.send();
 }));
 
+authRouter.post('/user', wrap(async (req, res) => {
+    const user = req.body;
+    user.password = await bcrypt.hash(user.password, 12);
+
+    const createdUserId = await authDao.createUser(user);
+    if (createdUserId === null) { return res.sendStatus(400); }
+    const createdUser = (await authDao.getUserById(createdUserId))!;
+    delete createdUser.password;
+    return res.send(createdUser);
+}));
+
 authRouter.get('/user', wrap(async (req, res) => {
     if (!req.user) { return res.sendStatus(404); }
     return res.send(req.user);

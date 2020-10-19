@@ -18,6 +18,19 @@ export class AuthDAO {
         return user;
     }
 
+    public async createUser(user: UserModel) {
+        const { username, first_name, last_name, email, password } = user;
+        try {
+            const createdUserId: number = await this.knex('user').insert({ username, first_name, last_name, email, password });
+            return createdUserId;
+        } catch (error) {
+            if (error.code !== 'ER_DUP_ENTRY') {
+                console.log('Error trying to create user.', error);
+            }
+            return null;
+        }
+    }
+
     /**
      * Hydrate: Réfer un processus de remplir un objet avec des données
      */

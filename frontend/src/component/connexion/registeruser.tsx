@@ -1,10 +1,12 @@
 import { Api } from 'api';
 import { UserModel } from 'common';
+import { UserContext } from 'context/usercontext';
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 interface Props { }
 interface State {
-    user?: UserModel[];
     username?: string;
     first_name?: string;
     last_name?: string;
@@ -13,6 +15,8 @@ interface State {
 }
 
 export class RegisterForm extends React.Component<Props, State> {
+    public static contextType = UserContext;
+    public context: UserContext;
     private api = new Api;
 
     constructor(props: Props) {
@@ -21,21 +25,18 @@ export class RegisterForm extends React.Component<Props, State> {
         this.state = {};
     }
 
-    public async componentDidMount() {
-        const user = (await this.api.getJson('/user') as any[]).map(UserModel.fromJSON);
-        this.setState({ user });
-    }
-
     public render() {
-        const { user } = this.state;
-        if (!user) { return 'Chargement...'; }
+        if (this.context.user === undefined) { return null; }
+        if (this.context.user) {
+            return <Redirect to='/connexion' />;
+        }
         return <>
             <section className='header-team' />
             <section className='bloc-page'>
                 <section id='connexionForm'>
                     <section className='form'>
                         <h2 className='title-registerstyle' >Créer votre compte</h2>
-                        <form className='registerStyle' onSubmit={this.createUser}>
+                        <form className='registerStyle' onSubmit={this.register}>
 
                             <input type='text' placeholder='Username' value={this.state.username ?? ''} onChange={e => { this.setState({ username: e.target.value }); }} />
                             <input type='text' placeholder='Prénom' value={this.state.first_name ?? ''} onChange={e => { this.setState({ first_name: e.target.value }); }} />
@@ -51,11 +52,16 @@ export class RegisterForm extends React.Component<Props, State> {
         </>;
     }
 
-    private createUser = async (event: React.FormEvent) => {
+    private register = async (event: React.FormEvent) => {
         event.preventDefault();
-        const body = { username: this.state.username, first_name: this.state.first_name, last_name: this.state.last_name, email: this.state.email, password: this.state.password };
-        const createdMessage = UserModel.fromJSON(await this.api.postGetJson('/user', body));
-        this.state.user!.push(createdMessage);
-        this.setState({ user: this.state.user, username: '', first_name: '', last_name: '', email: '', password: '' });
+
+        try {
+            const user = UserModel.fromJSON(await this.api.postGetJson('/auth/user',
+                { username: this.state.username, first_name: this.state.first_name, last_name: this.state.last_name, email: this.state.email, password: this.state.password }));
+            this.context.setUser(user);
+            toast.success('Bienvenu, votre compte à été crée.');
+        } catch {
+            toast.error('Votre nom dulisateur est déja utilisé.');
+        }
     };
 }

@@ -11,7 +11,6 @@ import { AuthDAO } from './dao/authdao';
 import { authRouter, loginHangler } from './router/authrouter';
 import { contactRouter } from './router/contactrouter';
 import { messageRouter } from './router/messagerouter';
-import { userRouter } from './router/userrouter';
 
 const authDAO = new AuthDAO;
 
@@ -61,7 +60,6 @@ passport.deserializeUser(async (userId: number, done) => {
 passport.use(new Strategy(loginHangler));
 
 app.use('/message', messageRouter);
-app.use('/user', userRouter);
 app.use('/contact', contactRouter);
 app.use('/auth', authRouter);
 

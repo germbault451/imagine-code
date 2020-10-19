@@ -6,7 +6,10 @@ import { Link, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 interface Props { }
-interface State { username?: string; password?: string; }
+interface State {
+    username?: string;
+    password?: string;
+}
 
 export class LoginForm extends React.Component<Props, State> {
     public static contextType = UserContext;
