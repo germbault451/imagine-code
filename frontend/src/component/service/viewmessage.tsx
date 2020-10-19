@@ -32,16 +32,6 @@ export class ViewMessage extends React.Component<Props, State> {
         }
     }
 
-    // public async componentDidMount() {
-    //     const messageId = this.props.match.params.messageId;
-    //     try {
-    //         const message = MessageModel.fromJSON(await this.api.getJson(`/message/${messageId}`));
-    //         this.setState({ message });
-    //     } catch {
-    //         this.setState({ message: null });
-    //     }
-    // }
-
     public render() {
         const currentMessageId = parseInt(this.props.match.params.messageId);
         const { message } = this.state;
