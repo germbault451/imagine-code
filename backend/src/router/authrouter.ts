@@ -1,9 +1,10 @@
 // import bcrypt from 'bcrypt';
 import bcrypt from 'bcrypt';
+import { Permission, UserModel } from 'common';
 import { Router } from 'express';
 import passport from 'passport';
 import { AuthDAO } from '../dao/authdao';
-import { wrap } from '../util';
+import { hasPermission, wrap } from '../util';
 
 
 const authRouter = Router();
@@ -29,18 +30,39 @@ authRouter.post('/logout', wrap(async (req, res) => {
     return res.send();
 }));
 
-authRouter.post('/user', wrap(async (req, res) => {
+authRouter.post('/user', hasPermission(Permission.manageUsers), wrap(async (req, res) => {
     const user = req.body;
     user.password = await bcrypt.hash(user.password, 12);
 
     const createdUserId = await authDao.createUser(user);
     if (createdUserId === null) { return res.sendStatus(400); }
+
     const createdUser = (await authDao.getUserById(createdUserId))!;
     delete createdUser.password;
     return res.send(createdUser);
 }));
 
+authRouter.put('/user/:userId', wrap(async (req, res) => {
+    const user: UserModel = req.body;
+    user.userId = parseInt(req.params.userId);
+    if (user.password) {
+        user.password = await bcrypt.hash(user.password, 12);
+    }
+
+    await authDao.updateUser(user);
+
+    const updateUser = (await authDao.getUserById(user.userId))!;
+    delete updateUser.password;
+    return res.send(updateUser);
+}));
+
 authRouter.get('/user', wrap(async (req, res) => {
+    if (!req.user) { return res.sendStatus(403); }
+    const users = await authDao.getUsers();
+    return res.send(users);
+}));
+
+authRouter.get('/user/current', wrap(async (req, res) => {
     if (!req.user) { return res.sendStatus(404); }
     return res.send(req.user);
 }));
