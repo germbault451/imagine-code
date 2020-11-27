@@ -4,8 +4,8 @@ declare global {
     module Express {
         interface Request {
             message: MessageModel;
-            user: UserModel;
             contact: ContactModel;
         }
+        interface User extends UserModel { }
     }
 }

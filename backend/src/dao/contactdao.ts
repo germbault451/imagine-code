@@ -28,4 +28,3 @@ export class ContactDAO {
         await this.knex('contact').update({ first_name, last_name, phone, email, comments }).where({ contactId }); // Ne pas oublié de ne pas mettre le ID
     }
 }
-

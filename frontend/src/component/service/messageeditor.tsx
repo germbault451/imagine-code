@@ -1,5 +1,6 @@
 import { Api } from 'api';
-import { MessageModel } from 'common';
+import { MessageModel, Permission } from 'common';
+import { UserContext } from 'context/usercontext';
 import React from 'react';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
@@ -16,6 +17,8 @@ interface State {
     messageBeingUpdated?: MessageModel;
 }
 export class MessageEditor extends React.Component<Props, State> {
+    public static contextType = UserContext;
+    public context: UserContext;
     private api = new Api;
 
     constructor(props: Props) {
@@ -28,7 +31,8 @@ export class MessageEditor extends React.Component<Props, State> {
     }
     public render() {
         const { messages } = this.state;
-        if (!messages) { return 'Chargement...'; }
+        const { user } = this.context;
+        if (!messages || user === undefined) { return 'Chargement...'; }
 
         const dateFormat = { year: 'numeric', month: 'long', day: 'numeric' };
         const closeConfirm = () => this.setState({ messageBeingUpdated: undefined });
@@ -51,13 +55,16 @@ export class MessageEditor extends React.Component<Props, State> {
                         {messages.map(message =>
                             <section key={message.messageId} className='ajust'>
                                 <p className='color-01 strong'>{message.first_name}, de: {message.city}
-                                    <span className='closemodal' onClick={() => this.deleteMessage(message)}>x</span></p>
+                                    {user?.hasPermission(Permission.deleteMessage) ?
+                                        <span className='closemodal' onClick={() => this.deleteMessage(message)}>x</span> : null}
+                                </p>
                                 <p className='color-01'>Object: {message.object}</p>
                                 <p className='color-01'>{this.getMessageCount(message)}</p>
                                 <section className='space'>
                                     <p className='color-01'>Publié le: {message.created_at.toLocaleDateString('fr-CA', dateFormat)}</p>
                                     <div>
-                                        <button type='button' onClick={() => this.setState({ messageBeingUpdated: message })}>Modifier votre message</button>
+                                        {user?.hasPermission(Permission.updateMessage) ?
+                                            <button type='button' onClick={() => this.setState({ messageBeingUpdated: message })}>Modifier votre message</button> : null}
                                         <Link to={`/${message.messageId}`}><button type='button'>Lire plus</button></Link>
                                     </div>
                                 </section>
@@ -68,8 +75,8 @@ export class MessageEditor extends React.Component<Props, State> {
                         <h2>Laissez-nous un commentaire</h2>
                         <form onSubmit={this.createMessage}>
 
-                            <input type='text' placeholder='Prénom' required={true} value={this.state.first_name ?? ''} onChange={e => { this.setState({ first_name: e.target.value }); }} />
-                            <input type='text' placeholder='Ville' required={true} value={this.state.city ?? ''} onChange={e => { this.setState({ city: e.target.value }); }} />
+                            <input type='text' placeholder='Prénom' value={this.state.first_name ?? ''} onChange={e => { this.setState({ first_name: e.target.value }); }} />
+                            <input type='text' placeholder='Ville' value={this.state.city ?? ''} onChange={e => { this.setState({ city: e.target.value }); }} />
 
                             <select value={this.state.object ?? ''} onChange={e => { this.setState({ object: e.target.value }); }} >
                                 <option value='' disabled={true}>Selectionnez l'object du message</option>
@@ -78,10 +85,9 @@ export class MessageEditor extends React.Component<Props, State> {
                                 <option value='commentaire'>commentaire</option>
                             </select>
 
-                            <textarea placeholder='Inscrire votre commentaire ici' required={true} value={this.state.text ?? ''} onChange={e => { this.setState({ text: e.target.value }); }} />
+                            <textarea placeholder='Inscrire votre commentaire ici' value={this.state.text ?? ''} onChange={e => { this.setState({ text: e.target.value }); }} />
 
                             <input type='submit' value='Envoyé' />
-
                         </form>
                     </section>
                 </section>

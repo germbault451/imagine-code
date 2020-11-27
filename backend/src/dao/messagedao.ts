@@ -18,6 +18,12 @@ export class MessageDAO {
         return MessageModel.fromJSON(message);
     }
 
+    public async getMessages() {
+        const messages = await this.knex('message').select('*');
+
+        return messages.map(MessageModel.fromJSON);
+    }
+
     public async updateMessage(message: MessageModel) {
         const { messageId, first_name, city, object, text } = message;
         await this.knex('message').update({ first_name, city, object, text }).where({ messageId });
@@ -25,11 +31,5 @@ export class MessageDAO {
 
     public async deleteMessage(messageId: number) {
         await this.knex('message').delete().where({ messageId });
-    }
-
-    public async getMessages() {
-        const messages = await this.knex('message').select('*');
-
-        return messages.map(MessageModel.fromJSON);
     }
 }
