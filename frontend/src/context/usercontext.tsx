@@ -45,10 +45,18 @@ export class UserContextComponent extends React.Component<{}, UserContext> {
     }
 
     public render() {
+<<<<<<< HEAD
         if (this.state.user === undefined) { return null; }
         return <UserContext.Provider value={this.state}>
             {this.props.children}
         </UserContext.Provider>;
 
+=======
+        return (
+            <UserContext.Provider value={this.state}>
+                {this.props.children}
+            </UserContext.Provider>
+        );
+>>>>>>> production
     }
 }

@@ -34,11 +34,19 @@ export class AuthDAO {
     /**
      * Hydrate: Réfer un processus de remplir un objet avec des données
      */
+<<<<<<< HEAD
     private hydrate = async (user: UserModel) => {
+=======
+    private async hydrate(user: UserModel) {
+>>>>>>> production
         const userId = user.userId;
         const roles: Role[] = await this.knex('role').pluck('role').where({ userId });
         user.roles = roles;
         return user;
+<<<<<<< HEAD
     };
+=======
+    }
+>>>>>>> production
 
 }
