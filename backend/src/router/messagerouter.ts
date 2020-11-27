@@ -1,13 +1,7 @@
 import { MessageModel, Permission } from 'common';
-<<<<<<< HEAD
 import { NextFunction, Request, Response, Router } from 'express';
 import { MessageDAO } from '../dao/messagedao';
 import { wrap } from '../util';
-=======
-import { Router } from 'express';
-import { MessageDAO } from '../dao/messagedao';
-import { hasPermission, wrap } from '../util';
->>>>>>> production
 
 const messageRouter = Router();
 const messageDAO = new MessageDAO;
@@ -45,11 +39,7 @@ messageRouter.put('/:messageId', hasPermission(Permission.updateMessage), wrap(a
     return res.send(await messageDAO.getMessage(req.message.messageId));
 }));
 
-<<<<<<< HEAD
 messageRouter.delete('/:messageId', hasPermission(Permission.deleteMessage), wrap(async (req, res) => {
-=======
-messageRouter.delete('/:messageId', hasPermission(Permission.manageUsers), wrap(async (req, res) => {
->>>>>>> production
     await messageDAO.deleteMessage(req.message.messageId);
     return res.sendStatus(204);
 }));

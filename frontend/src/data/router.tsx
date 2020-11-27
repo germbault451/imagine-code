@@ -49,10 +49,6 @@ export class Router extends React.Component<Props, State> {
                 <Route path='/equipe' component={Team} />
                 <Route path='/services' component={MessageEditor} />
                 <Route path='/contact' component={Contact} />
-<<<<<<< HEAD
-=======
-                <Route path='/registeruser' component={RegisterForm} />
->>>>>>> production
                 <Route path='/connexion' component={LoginForm} />
                 <Route path='/:messageId' component={ViewMessage} />
                 <Route path='/' component={Home} />
